@@ -1,0 +1,49 @@
+package org.labs.dining;
+
+import org.labs.dining.items.Programmer;
+import org.labs.dining.items.Spoon;
+import org.labs.dining.items.Waiter;
+
+public class DiningProgrammersWorld {
+
+    public static Programmer[] programmers;
+
+    private static final int DEFAULT_PORTIONS_AMOUNT = 1_000_000;
+    private static final int DEFAULT_WAITERS_AMOUNT = 2;
+    private static final int DEFAULT_PROGRAMMERS_AMOUNT = 5;
+
+    public void startDining(
+            Integer portionsAmount,
+            Integer waitersAmount,
+            Integer programmersAmount
+    ) throws InterruptedException {
+        int portionsAmountToInitialize = portionsAmount == null ? DEFAULT_PORTIONS_AMOUNT : portionsAmount;
+        int waitersAmountToInitialize = waitersAmount == null ? DEFAULT_WAITERS_AMOUNT : waitersAmount;
+        int programmersAmountToInitialize = programmersAmount == null ? DEFAULT_PROGRAMMERS_AMOUNT : programmersAmount;
+
+        SharedContext.initialize(portionsAmountToInitialize, waitersAmountToInitialize, programmersAmountToInitialize);
+        programmers = new Programmer[programmersAmountToInitialize];
+
+        for (int i = 0; i < programmersAmountToInitialize; i++) {
+            Spoon leftSpoon = SharedContext.spoons[i];
+            Spoon rightSpoon = SharedContext.spoons[(i + 1) % programmersAmountToInitialize];
+
+            Programmer currentProgrammer = i == programmersAmountToInitialize - 1
+                    ? new Programmer(String.valueOf(i), rightSpoon, leftSpoon)
+                    : new Programmer(String.valueOf(i), leftSpoon, rightSpoon);
+            currentProgrammer.start();
+            programmers[i] = currentProgrammer;
+        }
+
+        for (int i = 0; i < programmersAmountToInitialize; i++) {
+            programmers[i].join();
+        }
+
+        int sumPortionsFromProgrammer = 0;
+        for (int i = 0; i < programmersAmountToInitialize; i++) {
+            sumPortionsFromProgrammer += programmers[i].portionsConsumed;
+        }
+        System.out.println("Food left: " + Waiter.portionsAmount);
+        System.out.println("Total consumed food: " + sumPortionsFromProgrammer);
+    }
+}
