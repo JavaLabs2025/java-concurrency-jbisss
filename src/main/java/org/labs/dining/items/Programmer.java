@@ -7,12 +7,16 @@ public class Programmer extends Thread {
     private final Spoon leftSpoon;
     private final Spoon rightSpoon;
 
-    public int portionsConsumed = 0;
+    private int portionsConsumed = 0;
 
     public Programmer(String programmerName, Spoon leftSpoon, Spoon rightSpoon) {
         super(programmerName);
         this.leftSpoon = leftSpoon;
         this.rightSpoon = rightSpoon;
+    }
+
+    public int getPortionsConsumed() {
+        return portionsConsumed;
     }
 
     private synchronized void printMessage(String message) throws InterruptedException {
