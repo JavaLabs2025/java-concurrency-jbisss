@@ -28,9 +28,10 @@ public class DiningProgrammersWorld {
             Spoon leftSpoon = SharedContext.spoons[i];
             Spoon rightSpoon = SharedContext.spoons[(i + 1) % programmersAmountToInitialize];
 
+            String programmerName = "Programmer_" + i;
             Programmer currentProgrammer = i == programmersAmountToInitialize - 1
-                    ? new Programmer(String.valueOf(i), rightSpoon, leftSpoon)
-                    : new Programmer(String.valueOf(i), leftSpoon, rightSpoon);
+                    ? new Programmer(programmerName, rightSpoon, leftSpoon)
+                    : new Programmer(programmerName, leftSpoon, rightSpoon);
             currentProgrammer.start();
             programmers[i] = currentProgrammer;
         }

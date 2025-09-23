@@ -17,7 +17,7 @@ public class Programmer extends Thread {
 
     private synchronized void printMessage(String message) throws InterruptedException {
         int ms = (int) (Math.random() * 10);
-        System.out.println("Programmer_" + Thread.currentThread().getName() + " " + message + " for: " + ms + "ms");
+        System.out.println(Thread.currentThread().getName() + " " + message + " for: " + ms + "ms");
         Thread.sleep(ms);
     }
 
