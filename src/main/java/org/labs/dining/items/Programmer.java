@@ -30,9 +30,9 @@ public class Programmer extends Thread {
     }
 
     public boolean requestPortion() throws InterruptedException {
-        Waiter waiter = SharedContext.waiterBlockingQueue.take();
+        Waiter waiter = SharedContext.getWaiterBlockingQueue().take();
         boolean portionTaken = waiter.tryTakePortion();
-        SharedContext.waiterBlockingQueue.put(waiter);
+        SharedContext.getWaiterBlockingQueue().put(waiter);
         return portionTaken;
     }
 

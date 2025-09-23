@@ -8,16 +8,24 @@ import java.util.concurrent.BlockingQueue;
 
 public class SharedContext {
 
-    public static Waiter[] waiters;
-    public static Spoon[] spoons;
-    public static BlockingQueue<Waiter> waiterBlockingQueue;
+    private static Waiter[] waiters;
+    private static Spoon[] spoons;
+    private static BlockingQueue<Waiter> waiterBlockingQueue;
+
+    public static Spoon getSpoon(int atIndex) {
+        return spoons[atIndex];
+    }
+
+    public static BlockingQueue<Waiter> getWaiterBlockingQueue() {
+        return waiterBlockingQueue;
+    }
 
     public static void initialize(
             int portionsAmount,
             int waitersAmount,
             int spoonsAmount
     ) throws InterruptedException {
-        Waiter.portionsAmount = portionsAmount;
+        Waiter.setPortionsAmount(portionsAmount);
 
         SharedContext.waiters = new Waiter[waitersAmount];
         SharedContext.spoons = new Spoon[spoonsAmount];

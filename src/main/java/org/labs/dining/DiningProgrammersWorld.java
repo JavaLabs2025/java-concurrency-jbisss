@@ -5,11 +5,11 @@ import org.labs.dining.items.Spoon;
 
 public class DiningProgrammersWorld {
 
-    public static Programmer[] programmers;
-
     private static final int DEFAULT_PORTIONS_AMOUNT = 1_000_000;
     private static final int DEFAULT_WAITERS_AMOUNT = 2;
     private static final int DEFAULT_PROGRAMMERS_AMOUNT = 5;
+
+    private static Programmer[] programmers;
 
     public void startDining(
             Integer portionsAmount,
@@ -24,8 +24,8 @@ public class DiningProgrammersWorld {
         programmers = new Programmer[programmersAmountToInitialize];
 
         for (int i = 0; i < programmersAmountToInitialize; i++) {
-            Spoon leftSpoon = SharedContext.spoons[i];
-            Spoon rightSpoon = SharedContext.spoons[(i + 1) % programmersAmountToInitialize];
+            Spoon leftSpoon = SharedContext.getSpoon(i);
+            Spoon rightSpoon = SharedContext.getSpoon((i + 1) % programmersAmountToInitialize);
 
             String programmerName = "Programmer_" + i;
             Programmer currentProgrammer = i == programmersAmountToInitialize - 1
