@@ -2,7 +2,6 @@ package org.labs.dining;
 
 import org.labs.dining.items.Programmer;
 import org.labs.dining.items.Spoon;
-import org.labs.dining.items.Waiter;
 
 public class DiningProgrammersWorld {
 
@@ -39,12 +38,5 @@ public class DiningProgrammersWorld {
         for (int i = 0; i < programmersAmountToInitialize; i++) {
             programmers[i].join();
         }
-
-        int sumPortionsFromProgrammer = 0;
-        for (int i = 0; i < programmersAmountToInitialize; i++) {
-            sumPortionsFromProgrammer += programmers[i].portionsConsumed;
-        }
-        System.out.println("Food left: " + Waiter.portionsAmount);
-        System.out.println("Total consumed food: " + sumPortionsFromProgrammer);
     }
 }
