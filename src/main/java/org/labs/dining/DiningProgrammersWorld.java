@@ -9,7 +9,11 @@ public class DiningProgrammersWorld {
     private static final int DEFAULT_WAITERS_AMOUNT = 2;
     private static final int DEFAULT_PROGRAMMERS_AMOUNT = 5;
 
-    private static Programmer[] programmers;
+    private Programmer[] programmers;
+
+    public Programmer[] getProgrammers() {
+        return programmers;
+    }
 
     public void startDining(
             Integer portionsAmount,

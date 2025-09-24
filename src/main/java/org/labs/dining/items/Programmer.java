@@ -20,7 +20,7 @@ public class Programmer extends Thread {
     }
 
     private synchronized void printMessage(String message) throws InterruptedException {
-        int ms = (int) (Math.random() * 10);
+        int ms = (int) (Math.random() * 2);
         System.out.println(Thread.currentThread().getName() + " " + message + " for: " + ms + "ms");
         Thread.sleep(ms);
     }
