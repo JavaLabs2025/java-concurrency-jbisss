@@ -19,8 +19,14 @@ public class Programmer extends Thread {
         return portionsConsumed;
     }
 
+    /**
+     * Любое действие выводится в консоль, поэтому управление "длительностью" действия
+     * происходит здесь - в одном месте
+     * <p>
+     * Выбирается случайное время для задержки, печатается действия и поток "засыпает" на выбранное время
+     */
     private synchronized void printMessage(String message) throws InterruptedException {
-        int ms = (int) (Math.random() * 2);
+        int ms = (int) (Math.random() * 100);
         System.out.println(Thread.currentThread().getName() + " " + message + " for: " + ms + "ms");
         Thread.sleep(ms);
     }
