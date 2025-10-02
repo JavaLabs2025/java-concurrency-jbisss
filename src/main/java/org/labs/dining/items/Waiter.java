@@ -1,22 +1,17 @@
 package org.labs.dining.items;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Waiter {
 
-    private static final Object waitersLock = new Object();
-
-    private static int portionsAmount;
+    private static AtomicInteger portionsAmount;
 
     public static void setPortionsAmount(int portionsAmount) {
-        Waiter.portionsAmount = portionsAmount;
+        Waiter.portionsAmount = new AtomicInteger(portionsAmount);
     }
 
     public boolean tryTakePortion() {
-        synchronized (waitersLock) {
-            if (portionsAmount > 0) {
-                portionsAmount--;
-                return true;
-            }
-            return false;
-        }
+        int decrementedPortionsAmount = portionsAmount.getAndDecrement();
+        return decrementedPortionsAmount > 0;
     }
 }
