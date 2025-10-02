@@ -42,16 +42,17 @@ public class Programmer extends Thread {
         return portionTaken;
     }
 
-    public void takeSpoons() throws InterruptedException {
+    public void takeSpoonsAndEat() throws InterruptedException {
         synchronized (leftSpoon) {
             printMessage("takes left spoon");
             synchronized (rightSpoon) {
                 printMessage("takes right spoon");
+                eat();
             }
         }
     }
 
-    public void eat() throws InterruptedException {
+    private void eat() throws InterruptedException {
         printMessage("is eating");
         this.portionsConsumed++;
     }
@@ -67,8 +68,7 @@ public class Programmer extends Thread {
                 trashTalk();
                 boolean portionTaken = requestPortion();
                 if (!portionTaken) break;
-                takeSpoons();
-                eat();
+                takeSpoonsAndEat();
                 putSpoons();
             }
             System.out.println("Done " + this.getName() + " with consumed: " + this.portionsConsumed);
